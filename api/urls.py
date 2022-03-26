@@ -6,6 +6,7 @@ urlpatterns = [
     path('especies/', EspecieView.as_view(), name='especies_list'),
     path('especies/<int:id>', EspecieView.as_view(), name='especies_process'),
     path('avistamientos/', AvistamientoView.as_view(), name='avistamientos_list'),
+     path('avistamientos/<int:id>', AvistamientoView.as_view(), name='avistamientos_list'),
     path('avistamientos/especies/<int:ide>', AvistamientoView.as_view(), name='avistamientos_by_especies_process'),
 
 ]
