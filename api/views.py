@@ -139,7 +139,7 @@ class AvistamientoView(View):
 
     def post(self, request):
         jload = json.loads(request.body)
-        Avistamiento.objects.create(name=jload['name'], nota=jload['nota'])
+        Avistamiento.objects.create(name=jload['name'], nota=jload['nota'], autor=jload['autor'],latitud=jload['latitud'],longitud=jload['longitud'], id_lugar_id=['id_lugar_id'], id_especie_id=['id_especie_id'])
         datos = {'message':"Success"}
 
         return JsonResponse(datos)
