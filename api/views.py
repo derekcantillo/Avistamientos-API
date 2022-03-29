@@ -120,26 +120,26 @@ class AvistamientoView(View):
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, id=0):
-        
         if (id>0):
             avistamientos=list(Avistamiento.objects.filter(id=id).values())
             if len(avistamientos)>0:
                 avistamiento=avistamientos[0]
                 datos ={'message':"Success", 'avistamiento':avistamiento}
             else:
-                datos={'message':"avistamiento not found"}
+                datos={'message':"Avistamiento not found"}
             return JsonResponse(datos)
         else:
-            avistamiento=list(Avistamiento.objects.values())
-            if len(avistamiento)>0:
-                datos={'message':"Success", 'avistamiento':avistamiento}
+            avistamientos=list(Avistamiento.objects.values())
+            if len(avistamientos)>0:
+                datos={'message':"Success", 'avistamientos':avistamientos}
             else:
                 datos={'message':"Avistamientos not found"}
             return JsonResponse(datos)
 
+
     def post(self, request):
         jload = json.loads(request.body)
-        Avistamiento.objects.create(name=jload['name'], description=jload['description'])
+        Avistamiento.objects.create(name=jload['name'], nota=jload['nota'])
         datos = {'message':"Success"}
 
         return JsonResponse(datos)
@@ -150,6 +150,7 @@ class AvistamientoView(View):
         if len(avistamientos)>0:
             avistamiento = Avistamiento.objects.get(id=id)
             avistamiento.name=jload['name']
+            avistamiento.nota=jload['nota']
             avistamiento.autor=jload['autor']
             avistamiento.latitud=jload['latitud']
             avistamiento.longitud=jload['longitud']
